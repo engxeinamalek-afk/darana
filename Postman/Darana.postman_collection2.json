@@ -1,0 +1,662 @@
+{
+  "info": {
+    "_postman_id": "5b5cffae-ab38-40ff-8607-894cb3968173",
+    "name": "Darana",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "54164966",
+    "_collection_link": "https://go.postman.co/collection/54164966-5b5cffae-ab38-40ff-8607-894cb3968173?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Get office properties",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/properties?per_page=15",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "properties"
+          ],
+          "query": [
+            {
+              "key": "per_page",
+              "value": "15"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Properties by customer",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{customer_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/customer/properties?is_featured=1&city=1&type=sale",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "customer",
+            "properties"
+          ],
+          "query": [
+            {
+              "key": "is_featured",
+              "value": "1"
+            },
+            {
+              "key": "city",
+              "value": "1"
+            },
+            {
+              "key": "type",
+              "value": "sale"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Properties by customer rejected",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{customer_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/customer/properties?is_featured=1&city=1&type=appartment",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "customer",
+            "properties"
+          ],
+          "query": [
+            {
+              "key": "is_featured",
+              "value": "1"
+            },
+            {
+              "key": "city",
+              "value": "1"
+            },
+            {
+              "key": "type",
+              "value": "appartment"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Property by customer",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{customer_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/customer/properties/1/show",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "customer",
+            "properties",
+            "1",
+            "show"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Property by customer V2",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{customer_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V2/customer/properties/1/show",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V2",
+            "customer",
+            "properties",
+            "1",
+            "show"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get featured properties by customer",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{customer_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/customer/properties/featured",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "customer",
+            "properties",
+            "featured"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get properties count in city by customer",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{customer_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/customer/cities/1/count",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "customer",
+            "cities",
+            "1",
+            "count"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Property by office",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/properties/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "properties",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update property status by office",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/properties/1/status",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "properties",
+            "1",
+            "status"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update property status by office Copy",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PATCH",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/properties/1/is_featured",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "properties",
+            "1",
+            "is_featured"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Store Property by office",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"owner_id\": 1,\r\n  \"city_id\": 5,\r\n  \"title\": \"شقة سكنية فاخرة للبيع في وسط المدينة\",\r\n  \"description\": \"شقة واسعة تتكون من 3 غرف نوم وصالة كبيرة مع إطلالة مميزة وقريبة من كافة الخدمات الحيوية.\",\r\n  \"internal_notes\": \"المالك مستعجل على البيع ويمكن التفاوض على السعر ققليلاً.\",\r\n  \"type\": \"sale\", \r\n  \"is_featured\": true,\r\n  \"price\": 250000,\r\n  \"currency\": \"USD\",\r\n  \"commission_rate\": 2.5\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/properties",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "properties"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Store Property Rejected",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"owner_id\": 1,\r\n  \"city_id\": 5,\r\n  \"title\": \"شقة\",\r\n  \"description\": \"شقة واسعة تتكون من 3 غرف نوم وصالة كبيرة مع إطلالة مميزة وقريبة من كافة الخدمات الحيوية.\",\r\n  \"internal_notes\": \"المالك مستعجل على البيع ويمكن التفاوض على السعر ققليلاً.\",\r\n  \"type\": \"apartment\", \r\n  \"is_featured\": true,\r\n  \"price\": 250000,\r\n  \"currency\": \"USD\",\r\n  \"commission_rate\": 2.5\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/properties",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "properties"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Store property image by office",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/images/property/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "images",
+            "property",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Store office logo",
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{offica_token}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": []
+            }
+          ]
+        },
+        "url": {
+          "raw": "http://127.0.0.1:8000/api/V1/office/images/office/1",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "api",
+            "V1",
+            "office",
+            "images",
+            "office",
+            "1"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "variable": [
+    {
+      "key": "offica_token",
+      "value": ""
+    },
+    {
+      "key": "customer_token",
+      "value": ""
+    }
+  ]
+}
