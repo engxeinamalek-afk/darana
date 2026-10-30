@@ -4,6 +4,7 @@ namespace App\Http\Controllers\V2\Office;
 
 use App\Enums\PropertyStatus;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\GetPaginatedDataRequest;
 use App\Http\Requests\StorePropertyRequest;
 use App\Http\Resources\V2\PropertyV2Resource;
 use App\Models\Property;
@@ -18,10 +19,12 @@ class PropertyController extends Controller
     use ApiResponse;
     public function __construct(private GetPropertiesService $service){    }
 
-    public function index(){
+    public function index(GetPaginatedDataRequest $request){
+        $limit = $request->validated()['per_page']?? 10;
+
         $user = auth()->user();
 
-        $properties= $this->service->getOfficeProperties($user);
+        $properties= $this->service->getOfficeProperties($user,$limit);
 
         return $this->successResponse(
             data:['properties'=> PropertyV2Resource::collection($properties),
@@ -30,6 +33,7 @@ class PropertyController extends Controller
                                                 'next_page'    => $properties->nextPageUrl(),
                                                 'prev_page'    => $properties->previousPageUrl(),
                                                 'total_pages'  => $properties->lastPage(),
+                                                'total_properties' => $properties->total()
                                             ]],
             message:"Properties retriesved successfully"
         );
@@ -81,6 +85,11 @@ class PropertyController extends Controller
 
 
 
-
+    public function checkCache()
+{
+    $keys = \Illuminate\Support\Facades\Redis::connection('cache')->keys('*');
+    
+    return $keys;
+}
 
 }

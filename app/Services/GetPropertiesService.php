@@ -34,17 +34,17 @@ class GetPropertiesService
         });
     }
 
-    public function getOfficeProperties(User $user){
+    public function getOfficeProperties(User $user, int $limit){
         $page = request()->query('page', 1);
         $tagKey = "user_{$user->id}_properties";
         $cacheKey = "office_{$user->id}_properties_page_{$page}";
 
-        return Cache::tags([$tagKey])->remember($cacheKey, now()->addMinute(20), function () use ($user, $page) {
-            return $user->properties()
+        return Cache::tags([$tagKey])->remember($cacheKey, now()->addMinute(20), function () use ($user, $page,$limit) {
+            return $user->properties()->withoutGlobalScope(AvailableScope::class)
                         ->select('id', 'city_id', 'type', 'title', 'price', 'currency', 'created_at')
                         ->with('city:id,name')
                         ->latest()
-                        ->paginate(12);
+                        ->paginate($limit);
         });
 
     }
