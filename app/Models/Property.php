@@ -11,7 +11,10 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
+use App\Observers\PropertyObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy([PropertyObserver::class])]
 class Property extends Model
 {
     use HasFactory;
@@ -29,6 +32,7 @@ class Property extends Model
         'internal_notes',
         'commission_rate',
     ];
+
     protected static function booted(): void
     {
         static::addGlobalScope(new AvailableScope);
