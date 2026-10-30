@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -30,6 +31,9 @@ class User extends Authenticatable
     public function logo(): MorphOne
     {
         return $this->morphOne(Image::class, 'imageable');
+    }
+    public function properties():HasMany{
+        return $this->hasMany(Property::class,'office_id');
     }
 
     /**
