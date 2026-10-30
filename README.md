@@ -1,59 +1,38 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Laravel Real Estate API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A RESTful API built with Laravel to power real estate platforms with advanced property listings, filtering, and user authentication.
 
-## About Laravel
+## Caching Strategy
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Property Details
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+* **Key:** `property_show_{id}`
+* **Duration:** **10 Minutes**
+* **Rationale:** Property details are highly requested but change infrequently. A 10-minute TTL ensures high performance and reduces database load, while keeping the data fresh enough to reflect critical updates like status changes or featured visibility.
+* **Cache Invalidation:** The cache key is immediately cleared whenever the property status changes (e.g., marked as *Sold*) or when its features/premium status are updated.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Featured Properties
 
-## Learning Laravel
+* **Cache Tag:** `featured_properties`
+* **Duration:** **10 Minutes**
+* **Rationale:** The featured properties list is the most heavily trafficked endpoint on the platform (usually displayed on the homepage). Caching pages under a unified tag for 10 minutes drastically cuts down complex database queries and speeds up response times for users, while properly handling paginated results.
+* **Cache Invalidation:** The entire cache tag is automatically flushed whenever any property is marked/unmarked as *Featured*, or when a featured property is *Sold*.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+### Agency Properties
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+* **Cache Tag:** `user_{id}_properties`
+* **Duration:** **20 Minutes**
+* **Rationale:** Agency portfolios are relatively static. Using cache tags allows effective caching of all paginated pages for a specific agency, optimizing database performance for dedicated agency pages without risking stale or broken inventories across pages.
+* **Cache Invalidation:** The specific agency's cache tag is immediately flushed whenever that agency adds a new property listing, or when any of their existing properties are marked as *Sold*.
 
-## Laravel Sponsors
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### City Properties Count
 
-### Premium Partners
+* **Key:** `city:{id}:count`
+* **Duration:** **10 Minutes**
+* **Rationale:** Displaying the total number of available listings per city is common on homepages and search filters. Since counting rows across large datasets is resource-intensive for the database, caching this count for 10 minutes significantly accelerates page loads while keeping the metrics accurate.
+* **Cache Invalidation:** The cache key is instantly cleared whenever a new property is added to that specific city, or when an existing property within that city is marked as *Sold*.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+## API Versioning
 
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+We utilize **URI Versioning** (e.g., /v1/...) because it provides explicit clarity for frontend integration, simplifies routing within Laravel.
