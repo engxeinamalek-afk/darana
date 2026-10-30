@@ -15,7 +15,7 @@ class CheckRole
      */
     public function handle(Request $request, Closure $next, string $role): Response
     {
-        if (!$request->user() || $request->user()->role->value !== $role) {
+        if (!$request->user() || $request->user()->role !== $role) {
             throw new AuthorizationException('You do not have the required permissions to access this resource.');
         }
         return $next($request);
