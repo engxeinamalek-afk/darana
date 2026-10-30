@@ -19,7 +19,7 @@ class PropertyController extends Controller
 
         $properties = Property::select('id','city_id','type','title','price','currency','is_featured')
             ->featured($request->is_featured)
-            ->inCity($request->city_id)
+            ->inCity($request->city)
             ->ofType($request->type)
             ->priceGreaterThan($request->min_price)
             ->priceLessThan($request->max_price)
