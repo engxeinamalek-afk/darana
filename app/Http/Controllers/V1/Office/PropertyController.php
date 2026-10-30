@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V2\Office;
+namespace App\Http\Controllers\V1\Office;
 
 use App\Enums\PropertyStatus;
 use App\Http\Controllers\Controller;

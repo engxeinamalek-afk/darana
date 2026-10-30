@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\V2\Customer;
+namespace App\Http\Controllers\V1\Customer;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FilterPropertyRequest;
